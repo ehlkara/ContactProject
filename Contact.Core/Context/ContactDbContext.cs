@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Contact.Models.Entities.Contact;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,16 @@ namespace Contact.Core.Context
 
         }
 
+        public DbSet<Guide> Guides { get; set; }
+
+        public DbSet<ContactInfo> ContactInfos { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Guide>().HasMany(x => x.ContactInfos).WithOne(x => x.Guide).HasForeignKey(x => x.GuideId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

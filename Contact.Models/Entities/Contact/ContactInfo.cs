@@ -8,6 +8,7 @@ namespace Contact.Models.Entities.Contact
         public string Email { get; set; }
         public string Pin { get; set; }
         public string Description { get; set; }
-        public List<Guide> Guides { get; set; } = new List<Guide>();
+        public Guid GuideId { get; set; }
+        public Guide Guide { get; set; }
     }
 }
