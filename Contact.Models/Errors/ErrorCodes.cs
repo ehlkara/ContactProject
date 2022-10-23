@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Contact.Models.Errors
+﻿namespace Contact.Models.Errors
 {
     public enum ErrorCodes
     {
         NotWorkMigrate = 1001,
+        GuideCannotCreate = 1002,
+        GuideCannotUpdate = 1003,
+        GuideCannotDelete = 1004,
+        GuideCannotFound = 1005,
+        GuideDetailListCannotFound = 1006
     }
 }

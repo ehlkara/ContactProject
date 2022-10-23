@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Contact.Models.Errors
+﻿namespace Contact.Models.Errors
 {
     public class ErrorMessages
     {
         public const string NotWorkedMigrate = "Migrate not work";
+        public const string GuideCannotCreate = "Guide cannot created";
+        public const string GuideCannotUpdate = "Guide cannot updated";
+        public const string GuideCannotDelete = "Guide cannot deleted";
+        public const string GuideCannotFound = "Guide cannot found";
+        public const string GuideDetailListCannotFound = "Guide detail list cannot found";
     }
 }
