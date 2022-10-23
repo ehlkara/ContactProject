@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.API", "Contact.API.csproj", "{B569A60C-4405-4BBA-9623-DD72023C0823}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.API", "Contact.API.csproj", "{B569A60C-4405-4BBA-9623-DD72023C0823}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Models", "..\Contact.Models\Contact.Models.csproj", "{FD06FDEA-42AC-4D3D-8B93-545929CB70DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Models", "..\Contact.Models\Contact.Models.csproj", "{FD06FDEA-42AC-4D3D-8B93-545929CB70DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Core", "..\Contact.Core\Contact.Core.csproj", "{A9AA7E9D-C4D2-456B-9058-5EDD773B69CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Core", "..\Contact.Core\Contact.Core.csproj", "{A9AA7E9D-C4D2-456B-9058-5EDD773B69CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Shared", "..\Contact.Shared\Contact.Shared.csproj", "{B7F81F44-48AD-4FD9-8D2E-761238903A6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Shared", "..\Contact.Shared\Contact.Shared.csproj", "{B7F81F44-48AD-4FD9-8D2E-761238903A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.DataAccess", "..\Contact.DataAccess\Contact.DataAccess.csproj", "{C9FD6E4C-49FD-4647-9086-D528C7DD8318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.DataAccess", "..\Contact.DataAccess\Contact.DataAccess.csproj", "{C9FD6E4C-49FD-4647-9086-D528C7DD8318}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.BusinessLogic", "..\Contact.BusinessLogic\Contact.BusinessLogic.csproj", "{61805FA4-5942-46E0-B8ED-5ACFE8DCE2F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.BusinessLogic", "..\Contact.BusinessLogic\Contact.BusinessLogic.csproj", "{61805FA4-5942-46E0-B8ED-5ACFE8DCE2F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactTestAPI.Test", "..\ContactTestAPI.Test\ContactTestAPI.Test.csproj", "{47620323-6C4D-4D28-AD20-0697BBA4671D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{61805FA4-5942-46E0-B8ED-5ACFE8DCE2F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61805FA4-5942-46E0-B8ED-5ACFE8DCE2F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61805FA4-5942-46E0-B8ED-5ACFE8DCE2F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47620323-6C4D-4D28-AD20-0697BBA4671D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47620323-6C4D-4D28-AD20-0697BBA4671D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47620323-6C4D-4D28-AD20-0697BBA4671D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47620323-6C4D-4D28-AD20-0697BBA4671D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
