@@ -19,12 +19,13 @@ namespace Contact.BusinessLogic.ContactServices
             _mapper = mapper;
         }
 
-        public async Task<ContactInfoDto> AddContactInfoForGuideAsync(Guid guideId, ContactInfoDto contactInfo)
+        public async Task<ContactInfoDto> AddContactInfoForGuideAsync(ContactInfoDto contactInfo)
         {
             try
             {
                 var mappedDto = _mapper.Map<ContactInfo>(contactInfo);
-                var contactInfoResult = await _contactDAL.AddContactInfoForGuideAsync(guideId, mappedDto);
+                var guideId = _contactDAL.GetGuideById(mappedDto.GuideId).Result.Id.ToString();
+                var contactInfoResult = await _contactDAL.AddContactInfoForGuideAsync(guideId,mappedDto);
                 return _mapper.Map<ContactInfoDto>(contactInfoResult);
             }
             catch (Exception ex)
@@ -51,7 +52,7 @@ namespace Contact.BusinessLogic.ContactServices
 
         }
 
-        public async Task<bool> DeleteContactInfoForGuideAsync(Guid guideId, Guid contactInfoId)
+        public async Task<bool> DeleteContactInfoForGuideAsync(string guideId, string contactInfoId)
         {
             try
             {
@@ -79,12 +80,12 @@ namespace Contact.BusinessLogic.ContactServices
 
         }
 
-        public async Task<List<GuideDto>> GetGuideDetailAsync(Guid guideId)
+        public async Task<GuideDto> GetGuideDetailAsync(string guideId)
         {
             try
             {
                 var guideDetails = await _contactDAL.GetGuideDetailAsync(guideId);
-                return _mapper.Map<List<GuideDto>>(guideDetails);
+                return _mapper.Map<GuideDto>(guideDetails);
             }
             catch (Exception ex)
             {
@@ -109,11 +110,12 @@ namespace Contact.BusinessLogic.ContactServices
 
         }
 
-        public async Task<ContactInfoDto> UpdateContactInfoForGuideAsync(Guid guideId, ContactInfoDto contactInfo)
+        public async Task<ContactInfoDto> UpdateContactInfoForGuideAsync(ContactInfoDto contactInfo)
         {
             try
             {
                 var mappedDto = _mapper.Map<ContactInfo>(contactInfo);
+                var guideId = _contactDAL.GetGuideById(mappedDto.GuideId).Result.Id.ToString();
                 var contactInfoResult = await _contactDAL.UpdateContactInfoForGuideAsync(guideId, mappedDto);
                 return _mapper.Map<ContactInfoDto>(contactInfoResult);
             }

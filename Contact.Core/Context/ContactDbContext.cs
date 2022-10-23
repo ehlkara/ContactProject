@@ -22,7 +22,7 @@ namespace Contact.Core.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Guide>().Property(x=>x.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Guide>().HasMany(x => x.ContactInfos).WithOne(x => x.Guide).HasForeignKey(x => x.GuideId);
 
             base.OnModelCreating(modelBuilder);

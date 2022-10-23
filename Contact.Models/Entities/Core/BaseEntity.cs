@@ -14,6 +14,7 @@ namespace Contact.Models.Entities.Core
             CreatedTime = DateTime.Now;
             DeletedTime = null;
             UpdatedTime = null;
+            Id = Guid.NewGuid();
         }
 
         [Key]

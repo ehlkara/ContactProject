@@ -66,7 +66,7 @@ namespace Contact.Core.Migrations
 
                     b.HasIndex("GuideId");
 
-                    b.ToTable("ContactInfos");
+                    b.ToTable("ContactInfos", (string)null);
                 });
 
             modelBuilder.Entity("Contact.Models.Entities.Contact.Guide", b =>
@@ -104,7 +104,7 @@ namespace Contact.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Guides");
+                    b.ToTable("Guides", (string)null);
                 });
 
             modelBuilder.Entity("Contact.Models.Entities.Contact.ContactInfo", b =>

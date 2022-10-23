@@ -38,7 +38,7 @@ namespace Contact.API.Controllers
         }
 
         [HttpDelete(template: "delete_contactInfo_for_guide")]
-        public async Task<IActionResult> DeleteContactInfoForGuideAsync([FromForm] Guid guideId, [FromForm] Guid contactInfoId)
+        public async Task<IActionResult> DeleteContactInfoForGuideAsync([FromForm] string guideId, [FromForm] string contactInfoId)
         {
             await _contactBLL.DeleteContactInfoForGuideAsync(guideId, contactInfoId);
             return CreateActionResult(Response<bool>.Success(204));
@@ -47,27 +47,27 @@ namespace Contact.API.Controllers
         [HttpGet(template: "get_guides")]
         public async Task<IActionResult> GetGuidesAsync()
         {
-            await _contactBLL.GetGuidesAsync();
-            return CreateActionResult(Response<List<GuideDto>>.Success(200));
+            var guides = await _contactBLL.GetGuidesAsync();
+            return CreateActionResult(Response<List<GuideDto>>.Success(200, guides));
         }
 
         [HttpGet(template: "get_guide_detail")]
-        public async Task<IActionResult> GetGuideDetailAsync([FromForm] Guid guideId)
+        public async Task<IActionResult> GetGuideDetailAsync(string guideId)
         {
-            await _contactBLL.GetGuideDetailAsync(guideId);
-            return CreateActionResult(Response<List<GuideDto>>.Success(200));
+            var guideDetails = await _contactBLL.GetGuideDetailAsync(guideId);
+            return CreateActionResult(Response<GuideDto>.Success(200, guideDetails));
         }
 
         [HttpPost(template: "create_contactInfo_for_guide")]
-        public async Task<IActionResult> AddContactInfoForGuideAsync([FromForm] Guid guideId,[FromBody] ContactInfoDto contactInfo)
+        public async Task<IActionResult> AddContactInfoForGuideAsync([FromBody] ContactInfoDto contactInfo)
         {
-            await _contactBLL.AddContactInfoForGuideAsync(guideId, contactInfo);
+            await _contactBLL.AddContactInfoForGuideAsync(contactInfo);
             return CreateActionResult(Response<ContactInfoDto>.Success(204));
         }
         [HttpPut(template: "update_contactInfo_for_guide")]
-        public async Task<IActionResult> UpdateContactInfoForGuideAsync([FromForm] Guid guideId,[FromBody] ContactInfoDto contactInfo)
+        public async Task<IActionResult> UpdateContactInfoForGuideAsync([FromBody] ContactInfoDto contactInfo)
         {
-            await _contactBLL.UpdateContactInfoForGuideAsync(guideId, contactInfo);
+            await _contactBLL.UpdateContactInfoForGuideAsync(contactInfo);
             return CreateActionResult(Response<ContactInfoDto>.Success(204));
         }
     }

@@ -2,7 +2,6 @@
 using Contact.DataAccess.Abstract;
 using Contact.Models.Entities.Contact;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Contact.DataAccess.Concrete
 {
@@ -15,11 +14,11 @@ namespace Contact.DataAccess.Concrete
             _context = context;
         }
 
-        public async Task<ContactInfo> AddContactInfoForGuideAsync(Guid guideId, ContactInfo contactInfo)
+        public async Task<ContactInfo> AddContactInfoForGuideAsync(string guideId, ContactInfo contactInfo)
         {
-            var personGuideResult = await _context.Guides.FirstOrDefaultAsync(x => x.Id == guideId);
+            var personGuideResult = await _context.Guides.FirstOrDefaultAsync(x => x.Id.ToString() == guideId);
 
-            var personGuide = new Guide() { Id = guideId,Name = personGuideResult.Name, Surname = personGuideResult.Surname, Company = personGuideResult.Company };
+            var personGuide = new Guide() { Id = personGuideResult.Id, Name = personGuideResult.Name, Surname = personGuideResult.Surname, Company = personGuideResult.Company };
 
             var contactInfos = new ContactInfo()
             {
@@ -27,7 +26,7 @@ namespace Contact.DataAccess.Concrete
                 PhoneNumber = contactInfo.PhoneNumber,
                 Pin = contactInfo.Pin,
                 Description = contactInfo.Description,
-                Guide = personGuide
+                GuideId = contactInfo.GuideId,
             };
 
             await _context.AddAsync(contactInfos);
@@ -42,9 +41,9 @@ namespace Contact.DataAccess.Concrete
             return guide;
         }
 
-        public async Task<bool> DeleteContactInfoForGuideAsync(Guid guideId, Guid contactInfoId)
+        public async Task<bool> DeleteContactInfoForGuideAsync(string guideId, string contactInfoId)
         {
-            var contactInfoResult = _context.ContactInfos.Include(x => x.GuideId == guideId).Where(x => x.Id == contactInfoId).First();
+            var contactInfoResult = await _context.ContactInfos.Where(x => x.GuideId.ToString() == guideId).FirstAsync(x => x.Id.ToString() == contactInfoId);
             contactInfoResult.IsDelete = true;
             contactInfoResult.IsActive = false;
             contactInfoResult.DeletedTime = DateTime.Now;
@@ -70,26 +69,27 @@ namespace Contact.DataAccess.Concrete
             return guide;
         }
 
-        public async Task<List<Guide>> GetGuideDetailAsync(Guid guideId)
+        public async Task<Guide> GetGuideDetailAsync(string guideId)
         {
-            var guideWithContactInfos = _context.Guides.Include(x => x.ContactInfos).Where(x => x.Id == guideId && x.IsDelete != false).ToList();
-            return guideWithContactInfos;
+            var guide = await _context.Guides.Include(x=>x.ContactInfos.Where(x=>x.IsDelete != true)).FirstOrDefaultAsync(x => x.Id.ToString() == guideId);
+            return guide;
         }
 
         public async Task<List<Guide>> GetGuidesAsync()
         {
-            var personGuides = await _context.Guides.Where(x => x.IsDelete != true).ToListAsync();
+            var personGuides = await _context.Guides.Include(x => x.ContactInfos.Where(x => x.IsDelete != true)).Where(x => x.IsDelete != true).ToListAsync();
             return personGuides;
         }
 
-        public async Task<ContactInfo> UpdateContactInfoForGuideAsync(Guid guideId, ContactInfo contactInfo)
+        public async Task<ContactInfo> UpdateContactInfoForGuideAsync(string guideId, ContactInfo contactInfo)
         {
-            var contactInfoResult = _context.ContactInfos.Include(x => x.GuideId == guideId).Where(x => x.Id == contactInfo.Id).First();
+            var contactInfoResult = await _context.ContactInfos.Where(x => x.GuideId.ToString() == guideId).FirstAsync(x=> x.Id == contactInfo.Id);
             contactInfoResult.PhoneNumber = contactInfo.PhoneNumber;
             contactInfoResult.Email = contactInfo.Email;
             contactInfoResult.Pin = contactInfo.Pin;
             contactInfoResult.Description = contactInfo.Description;
             contactInfoResult.UpdatedTime = contactInfo.UpdatedTime = DateTime.Now;
+            _context.ContactInfos.Update(contactInfoResult);
             await _context.SaveChangesAsync();
             return contactInfoResult;
         }
@@ -101,6 +101,7 @@ namespace Contact.DataAccess.Concrete
             guideResult.Surname = guide.Surname;
             guideResult.Company = guide.Company;
             guideResult.UpdatedTime = guide.UpdatedTime = DateTime.Now;
+            _context.Guides.Update(guideResult);
             await _context.SaveChangesAsync();
             return guideResult;
         }

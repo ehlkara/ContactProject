@@ -7,10 +7,10 @@ namespace Contact.BusinessLogic.Abstract
         Task<GuideDto> AddGuideAsync(GuideDto guide);
         Task<GuideDto> UpdateGuideAsync(GuideDto guide);
         Task<bool> DeleteGuideAsync(Guid guideId);
-        Task<bool> DeleteContactInfoForGuideAsync(Guid guideId, Guid contactInfoId);
+        Task<bool> DeleteContactInfoForGuideAsync(string guideId, string contactInfoId);
         Task<List<GuideDto>> GetGuidesAsync();
-        Task<List<GuideDto>> GetGuideDetailAsync(Guid guideId);
-        Task<ContactInfoDto> AddContactInfoForGuideAsync(Guid guideId, ContactInfoDto contactInfo);
-        Task<ContactInfoDto> UpdateContactInfoForGuideAsync(Guid guideId, ContactInfoDto contactInfo);
+        Task<GuideDto> GetGuideDetailAsync(string guideId);
+        Task<ContactInfoDto> AddContactInfoForGuideAsync(ContactInfoDto contactInfo);
+        Task<ContactInfoDto> UpdateContactInfoForGuideAsync(ContactInfoDto contactInfo);
     }
 }
