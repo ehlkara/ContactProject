@@ -8,7 +8,8 @@ namespace Contact.DataAccess.Abstract
         Task<Guide> UpdateGuideAsync(Guide guide);
         Task<bool> DeleteGuideAsync(Guide guide);
         Task<bool> DeleteContactInfoForGuideAsync(Guid guideId, Guid contactInfoId);
-        Task<List<Guide>> GetGuidesAsync(Guid guideId);
+        Task<List<Guide>> GetGuidesAsync();
+        Task<Guide> GetGuideById(Guid guideId);
         Task<List<Guide>> GetGuideDetailAsync(Guid guideId);
         Task<ContactInfo> AddContactInfoForGuideAsync(Guide guide, ContactInfo contactInfo);
         Task<ContactInfo> UpdateContactInfoForGuideAsync(Guide guide, ContactInfo contactInfo);

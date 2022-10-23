@@ -63,15 +63,21 @@ namespace Contact.DataAccess.Concrete
             return true;
         }
 
+        public Task<Guide> GetGuideById(Guid guideId)
+        {
+            var guide = _context.Guides.FirstOrDefaultAsync(x => x.Id == guideId);
+            return guide;
+        }
+
         public async Task<List<Guide>> GetGuideDetailAsync(Guid guideId)
         {
-            var guideWithContactInfos = _context.Guides.Include(x => x.ContactInfos).Where(x => x.Id == guideId).ToList();
+            var guideWithContactInfos = _context.Guides.Include(x => x.ContactInfos).Where(x => x.Id == guideId && x.IsDelete != false).ToList();
             return guideWithContactInfos;
         }
 
-        public async Task<List<Guide>> GetGuidesAsync(Guid guideId)
+        public async Task<List<Guide>> GetGuidesAsync()
         {
-            var personGuides = await _context.Guides.Where(x => x.IsDelete != true && x.Id == guideId).ToListAsync();
+            var personGuides = await _context.Guides.Where(x => x.IsDelete != true).ToListAsync();
             return personGuides;
         }
 
