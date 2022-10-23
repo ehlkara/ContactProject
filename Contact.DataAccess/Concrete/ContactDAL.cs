@@ -2,8 +2,6 @@
 using Contact.DataAccess.Abstract;
 using Contact.Models.Entities.Contact;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 
 namespace Contact.DataAccess.Concrete
 {
