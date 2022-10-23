@@ -2,6 +2,7 @@
 using Contact.DataAccess.Abstract;
 using Contact.Models.Entities.Contact;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Contact.DataAccess.Concrete
 {
@@ -14,11 +15,11 @@ namespace Contact.DataAccess.Concrete
             _context = context;
         }
 
-        public async Task<ContactInfo> AddContactInfoForGuideAsync(Guide guide, ContactInfo contactInfo)
+        public async Task<ContactInfo> AddContactInfoForGuideAsync(Guid guideId, ContactInfo contactInfo)
         {
-            var personGuideId = _context.Guides.FirstOrDefaultAsync(x => x.Id == guide.Id).Result.Id;
+            var personGuideResult = await _context.Guides.FirstOrDefaultAsync(x => x.Id == guideId);
 
-            var personGuide = new Guide() { Id = personGuideId,Name = guide.Name, Surname = guide.Surname, Company = guide.Company };
+            var personGuide = new Guide() { Id = guideId,Name = personGuideResult.Name, Surname = personGuideResult.Surname, Company = personGuideResult.Company };
 
             var contactInfos = new ContactInfo()
             {
@@ -52,9 +53,9 @@ namespace Contact.DataAccess.Concrete
             return true;
         }
 
-        public async Task<bool> DeleteGuideAsync(Guide guide)
+        public async Task<bool> DeleteGuideAsync(Guid guideId)
         {
-            var guideResult = await _context.Guides.FindAsync(guide.Id);
+            var guideResult = await GetGuideById(guideId);
             guideResult.IsDelete = true;
             guideResult.IsActive = false;
             guideResult.DeletedTime = DateTime.Now;
@@ -81,9 +82,9 @@ namespace Contact.DataAccess.Concrete
             return personGuides;
         }
 
-        public async Task<ContactInfo> UpdateContactInfoForGuideAsync(Guide guide, ContactInfo contactInfo)
+        public async Task<ContactInfo> UpdateContactInfoForGuideAsync(Guid guideId, ContactInfo contactInfo)
         {
-            var contactInfoResult = _context.ContactInfos.Include(x => x.GuideId == guide.Id).Where(x => x.Id == contactInfo.Id).First();
+            var contactInfoResult = _context.ContactInfos.Include(x => x.GuideId == guideId).Where(x => x.Id == contactInfo.Id).First();
             contactInfoResult.PhoneNumber = contactInfo.PhoneNumber;
             contactInfoResult.Email = contactInfo.Email;
             contactInfoResult.Pin = contactInfo.Pin;
