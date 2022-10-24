@@ -1,9 +1,23 @@
+using Contact.Core.Context;
 using FileCreateWorkerService;
+using FileCreateWorkerService.Services;
+using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((hostContext,services) =>
     {
+        IConfiguration Configuration = hostContext.Configuration; 
+
+        services.AddDbContext<ContactDbContext>(options =>
+        {
+            options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
+        });
+
+        services.AddSingleton<RabbitMQClientService>();
+        services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });
         services.AddHostedService<Worker>();
+
     })
     .Build();
 
