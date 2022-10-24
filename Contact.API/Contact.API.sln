@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactTestAPI.Test", "..\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report.API", "..\Report.API\Report.API.csproj", "{4D13992A-D16A-42AA-9542-3A4B66BE5213}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileCreateWorkerService", "..\FileCreateWorkerService\FileCreateWorkerService.csproj", "{ECC8095D-672C-44F5-9464-DA3569F0703A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{4D13992A-D16A-42AA-9542-3A4B66BE5213}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D13992A-D16A-42AA-9542-3A4B66BE5213}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D13992A-D16A-42AA-9542-3A4B66BE5213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECC8095D-672C-44F5-9464-DA3569F0703A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC8095D-672C-44F5-9464-DA3569F0703A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC8095D-672C-44F5-9464-DA3569F0703A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECC8095D-672C-44F5-9464-DA3569F0703A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

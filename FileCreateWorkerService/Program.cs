@@ -9,11 +9,6 @@ IHost host = Host.CreateDefaultBuilder(args)
     {
         IConfiguration Configuration = hostContext.Configuration; 
 
-        services.AddDbContext<ContactDbContext>(options =>
-        {
-            options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
-        });
-
         services.AddSingleton<RabbitMQClientService>();
         services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });
         services.AddHostedService<Worker>();
