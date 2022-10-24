@@ -54,7 +54,7 @@ namespace Contact.DataAccess.Concrete
 
         public async Task<bool> DeleteGuideAsync(Guid guideId)
         {
-            var guideResult = await GetGuideById(guideId);
+            var guideResult = await GetGuideById(guideId.ToString());
             guideResult.IsDelete = true;
             guideResult.IsActive = false;
             guideResult.DeletedTime = DateTime.Now;
@@ -63,9 +63,9 @@ namespace Contact.DataAccess.Concrete
             return true;
         }
 
-        public Task<Guide> GetGuideById(Guid guideId)
+        public Task<Guide> GetGuideById(string guideId)
         {
-            var guide = _context.Guides.FirstOrDefaultAsync(x => x.Id == guideId);
+            var guide = _context.Guides.FirstOrDefaultAsync(x => x.Id.ToString() == guideId);
             return guide;
         }
 

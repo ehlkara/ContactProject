@@ -1,4 +1,5 @@
-﻿using Contact.Shared.ContactDTOs;
+﻿using Contact.Models.Entities.Contact;
+using Contact.Shared.ContactDTOs;
 
 namespace Contact.BusinessLogic.Abstract
 {
@@ -9,6 +10,7 @@ namespace Contact.BusinessLogic.Abstract
         Task<bool> DeleteGuideAsync(Guid guideId);
         Task<bool> DeleteContactInfoForGuideAsync(string guideId, string contactInfoId);
         Task<List<GuideDto>> GetGuidesAsync();
+        Task<GuideDto> GetGuideById(string guideId);
         Task<GuideDto> GetGuideDetailAsync(string guideId);
         Task<ContactInfoDto> AddContactInfoForGuideAsync(ContactInfoDto contactInfo);
         Task<ContactInfoDto> UpdateContactInfoForGuideAsync(ContactInfoDto contactInfo);

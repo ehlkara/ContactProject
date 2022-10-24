@@ -24,7 +24,7 @@ namespace Contact.BusinessLogic.ContactServices
             try
             {
                 var mappedDto = _mapper.Map<ContactInfo>(contactInfo);
-                var guideId = _contactDAL.GetGuideById(mappedDto.GuideId).Result.Id.ToString();
+                var guideId = _contactDAL.GetGuideById(mappedDto.GuideId.ToString()).Result.Id.ToString();
                 var contactInfoResult = await _contactDAL.AddContactInfoForGuideAsync(guideId,mappedDto);
                 return _mapper.Map<ContactInfoDto>(contactInfoResult);
             }
@@ -80,6 +80,20 @@ namespace Contact.BusinessLogic.ContactServices
 
         }
 
+        public async Task<GuideDto> GetGuideById(string guideId)
+        {
+            try
+            {
+                var guide = await _contactDAL.GetGuideById(guideId);
+                return _mapper.Map<GuideDto>(guide);
+            }
+            catch (Exception ex)
+            {
+
+                throw new UserFriendlyException((int)ErrorCodes.GuideCannotFound, ErrorMessages.GuideCannotFound, ex.Message);
+            }
+        }
+
         public async Task<GuideDto> GetGuideDetailAsync(string guideId)
         {
             try
@@ -115,7 +129,7 @@ namespace Contact.BusinessLogic.ContactServices
             try
             {
                 var mappedDto = _mapper.Map<ContactInfo>(contactInfo);
-                var guideId = _contactDAL.GetGuideById(mappedDto.GuideId).Result.Id.ToString();
+                var guideId = _contactDAL.GetGuideById(mappedDto.GuideId.ToString()).Result.Id.ToString();
                 var contactInfoResult = await _contactDAL.UpdateContactInfoForGuideAsync(guideId, mappedDto);
                 return _mapper.Map<ContactInfoDto>(contactInfoResult);
             }

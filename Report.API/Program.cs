@@ -1,12 +1,19 @@
 using Contact.Core.Context;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using Report.API.Models;
+using Report.API.Services;
 using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(builder.Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });
+
+builder.Services.AddSingleton<RabbitMQPublisher>();
+
+builder.Services.AddSingleton<RabbitMQClientService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

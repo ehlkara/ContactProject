@@ -51,6 +51,13 @@ namespace Contact.API.Controllers
             return CreateActionResult(Response<List<GuideDto>>.Success(200, guides));
         }
 
+        [HttpGet(template: "get_guide_by_id")]
+        public async Task<IActionResult> GetGuideById(string guideId)
+        {
+            var guide = await _contactBLL.GetGuideById(guideId);
+            return CreateActionResult(Response<GuideDto>.Success(200, guide));
+        }
+
         [HttpGet(template: "get_guide_detail")]
         public async Task<IActionResult> GetGuideDetailAsync(string guideId)
         {
